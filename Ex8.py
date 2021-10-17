@@ -1,7 +1,6 @@
-import json
-
 import requests
 import time
+
 status_of_running_job = "Job is NOT ready"
 status_of_ended_job = "Job is ready"
 
