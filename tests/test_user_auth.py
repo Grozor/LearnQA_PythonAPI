@@ -3,8 +3,9 @@ import requests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
+
 class TestUserAuth(BaseCase):
-    excude_params = [
+    exclude_params = [
         ("no_cookie"),
         ("no_token")
     ]
@@ -35,7 +36,7 @@ class TestUserAuth(BaseCase):
             "User id from auth method is not equal to user id from check method"
         )
 
-    @pytest.mark.parametrize('condition', excude_params)
+    @pytest.mark.parametrize('condition', exclude_params)
     def test_negative_auth_check(self, condition):
 
         if condition == "no_cookie":

@@ -11,12 +11,14 @@ class TestMyProject:
         {"header": {'User-Agent': 'Mozilla/5.0 (iPad; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'}, 'platform': 'Mobile', 'browser': 'No', 'device': 'iPhone'}
     ]
 
+    def setup(self):
+        self.url = "https://playground.learnqa.ru/ajax/api/user_agent_check"
+
     @pytest.mark.parametrize('data', data_sets)
     def test_user_agent(self, data):
-        url = "https://playground.learnqa.ru/ajax/api/user_agent_check"
-        response = requests.get(url, headers=data["header"])
-        print(response.text)
+        response = requests.get(self.url, headers=data["header"])
         parsed_response = response.json()
+        print(response.text)
         assert parsed_response["platform"] == data["platform"], "There is an incorrect answer for 'platform'"
         assert parsed_response["browser"] == data["browser"], "There is an incorrect answer for 'browser'"
         assert parsed_response["device"] == data["device"], "There is an incorrect answer for 'device'"
