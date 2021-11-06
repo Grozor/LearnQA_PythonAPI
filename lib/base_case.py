@@ -1,4 +1,6 @@
 import json.decoder
+import random
+import string
 
 from datetime import datetime
 from requests import Response
@@ -35,5 +37,19 @@ class BaseCase:
             'username': 'learnqa',
             'firstName': 'learnqa',
             'lastName': 'learnqa',
+            'email': email
+        }
+
+    def prepare_random_registration_data(self):
+        base_part = ''.join(random.choice(string.ascii_lowercase) for i in range(4))
+        domain = 'example.com'
+        random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+        email = f"{base_part}{random_part}@{domain}"
+
+        return{
+            'password': ''.join(random.choice(string.ascii_lowercase) for i in range(4)),
+            'username': ''.join(random.choice(string.ascii_lowercase) for i in range(4)),
+            'firstName': ''.join(random.choice(string.ascii_lowercase) for i in range(4)),
+            'lastName': ''.join(random.choice(string.ascii_lowercase) for i in range(4)),
             'email': email
         }
