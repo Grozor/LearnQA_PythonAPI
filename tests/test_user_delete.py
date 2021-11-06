@@ -1,10 +1,12 @@
 from lib.my_requests import MyRequests
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
+import allure
 
 
 class TestUserDelete(BaseCase):
 
+    @allure.severity(allure.severity_level.NORMAL)
     def test_delete_fixed_user(self):
 
         # LOGIN
@@ -25,6 +27,7 @@ class TestUserDelete(BaseCase):
         Assertions.assert_code_status(response2, 400)
         assert response2.content.decode("utf-8") == f"Please, do not delete test users with ID 1, 2, 3, 4 or 5."
 
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_delete_just_created_user(self):
 
         # REGISTER
@@ -61,6 +64,7 @@ class TestUserDelete(BaseCase):
 
         assert response4.content.decode("utf-8") == f"User not found"
 
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_delete_user_as_other_user(self):
 
         # REGISTER USER1
